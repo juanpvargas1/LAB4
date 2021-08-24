@@ -1,60 +1,54 @@
-#ifndef ENRUTADOR_H
-#define ENRUTADOR_H
+#ifndef RED_H
+#define RED_H
 
-#include <iostream>
-#include <string>
-#include <map>
-#include <vector>
-#include <stdlib.h>
-#include <fstream>
-#include <string>
-#include <list>
-#include <stack>
-#include <time.h>
-using namespace std;
+#include "enrutador.h"
 
-        //Clase para modelar un unico enrutador
-
-class Arista ;  //Definimos el protoptipo de la clase arista
+        //Clase para modelar una Red de enrutadores
 
 
-class Enrutador{
+class Red{
 
-    friend class Red ;
 
 
     private:
 
-        char ID ;          //El identificador de cada enrutador será un caracter
+        map <char,Enrutador> red_enrutadores ;      //Contenedor de los enrutadores
 
-        vector <Arista> aristas_enrutador ;     //Vector que contiene las aristas de cada enrutador
-                                            //NOTA: tanto un enrutador A y B tienen guardada las misma arista
-                                            //que los une en su vector de aristas
+        map <char,Enrutador>::iterator iterador_red ;       //Iterador de la Red
+
+        map <char,Enrutador>::iterator iterador_red2 ;       //Iterador de la Red 2
+
     public:
 
-        Enrutador( unsigned short int ) ;       //Constructor
+            //Metodos de la clase Red
+
+       void almacenar_enrutador( Enrutador objeto_enrutador ) ;
+
+       void tamano_red() ;
+
+       void Crear_Arista() ;
+
+       void Lista_adyacencia() ;
+
+       void Eliminar_Enrutador() ;
+
+       void Eliminar_Arista() ;
+
+       void Modificar_peso() ;
+
+       void generacion_automatica() ;
+
+       void Envio_paquete() ;
+
+       void red_aleatoria() ;
+
 
 };
 
 
-    //Clase para modelar la arista/enlace/conexion entre los enrutadores
+bool comparacion( pair<char, unsigned int> a, pair<char, unsigned int>b );      //Funcion complementaria para
+                                                                                //el metodo Envio_paquete()
 
+#endif // RED_H
 
-class Arista{
-
-    friend class Red ;
-
-
-    private:
-
-        char origen, destino ;          //info que dice con quien está conectado el enrutador
-
-        unsigned int peso ;     //Numero que determinara los valores entre cada enrutador
-
-    public:
-
-        //No hay metodos, se accede a los datos privados desde la clase Red
-};
-
-#endif // ENRUTADOR_H
 
